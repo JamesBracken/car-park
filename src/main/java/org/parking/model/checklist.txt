@@ -1,8 +1,8 @@
-// Create a class ParkingLot
-// Create a class ParkingSpot
-// Add motorcycle, car, large enums as spotType to parkingSpot
-// Add motorcycleParking, carParking and largeParking to ParkingLot
-// Create each field as a list to contain ParkingSpot to dictate if parking is taken
+// Create a class ParkingLot FINISHED
+// Create a class ParkingSpot FINISHED
+// Add motorcycle, car, large enums as spotType to parkingSpot FINISHED
+// Add motorcycleParking, carParking and largeParking to ParkingLot FINISHED
+// Create each field as a list to contain ParkingSpot to dictate if parking is taken FINISHED
 // Create a method which tells us how many spots are remaining
 // Create a method which tells us how many total spots are in the parking lot
 // Create a method which tells us when the parking lot is full
