@@ -2,6 +2,9 @@ package org.parking;
 
 import org.parking.model.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class ParkingMain {
@@ -16,10 +19,21 @@ public class ParkingMain {
         System.out.println(myParkingLot.getLargeParking());
 //        TESTING ------------------------------------
 
-        Vehicle Motorcycle = new Motorcycle("KJA 123", Vehicle.vehicleType.MOTORCYCLE);
+//        Vehicle Motorcycle = new Motorcycle("KJA 123", Vehicle.vehicleType.MOTORCYCLE);
         VehicleFactory myFactory = new VehicleFactory();
         System.out.println("My factory license plate generator: " + myFactory.licensePlateGenerator());
-            }
+
+        System.out.println("Vehicle selector: " + myFactory.randomVehicleSelector());
+
+        List<Vehicle> myGarage = new ArrayList<>();
+
+        for (int i = 0; i < 10; i++) {
+            myGarage.add(myFactory.createRandomVehicle());
+        }
+
+        System.out.println("myGarage: " + myGarage);
+
+    }
 }
 
 // Create a class ParkingLot
