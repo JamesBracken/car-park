@@ -1,7 +1,6 @@
 package org.parking;
 
-import org.parking.model.ParkingLot;
-import org.parking.model.ParkingSpot;
+import org.parking.model.*;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
@@ -15,7 +14,12 @@ public class ParkingMain {
         System.out.println(myParkingLot.getCarParking());
         System.out.println(myParkingLot.getMotorcycleParking());
         System.out.println(myParkingLot.getLargeParking());
-    }
+//        TESTING ------------------------------------
+
+        Vehicle Motorcycle = new Motorcycle("KJA 123", Vehicle.vehicleType.MOTORCYCLE);
+        VehicleFactory myFactory = new VehicleFactory();
+        System.out.println("My factory license plate generator: " + myFactory.licensePlateGenerator());
+            }
 }
 
 // Create a class ParkingLot
@@ -23,6 +27,10 @@ public class ParkingMain {
 // Add motorcycle, car, large enums as spotType to parkingSpot
 // Add motorcycleParking, carParking and largeParking to ParkingLot
 // Create each field as a list to contain ParkingSpot to dictate if parking is taken
+// Create an abstract class of vehicle with relevant fields - licensePlate and vehicleType
+// Create all vehicle classes extending the vehicle class
+// Create a vehicle factory which will generate vehicles which we will later use to populate the parking
+//
 // Create a method which tells us how many spots are remaining
 // Create a method which tells us how many total spots are in the parking lot
 // Create a method which tells us when the parking lot is full
