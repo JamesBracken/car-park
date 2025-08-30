@@ -30,7 +30,6 @@ public class VehicleFactory {
 
         return licensePlate;
     }
-
 }
 
 

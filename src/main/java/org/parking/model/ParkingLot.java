@@ -5,39 +5,80 @@ import java.util.Collections;
 import java.util.List;
 
 public class ParkingLot {
-    private List<ParkingSpot.spotType> motorcycleParking;
-    private List<ParkingSpot.spotType> carParking;
-    private List<ParkingSpot.spotType> largeParking;
+    private List<Vehicle> motorcycleParking;
+    private List<Vehicle> carParking;
+    private List<Vehicle> largeParking;
 
     public ParkingLot(int motorcycleSpotsQty, int carSpotsQty, int largeSpotsQty) {
-        this.motorcycleParking = new ArrayList<ParkingSpot.spotType>(Collections.nCopies(motorcycleSpotsQty, null));
-        this.carParking = new ArrayList<ParkingSpot.spotType>(Collections.nCopies(carSpotsQty, null));
-        this.largeParking = new ArrayList<ParkingSpot.spotType>(Collections.nCopies(largeSpotsQty, null));
+        this.motorcycleParking = new ArrayList<Vehicle>(Collections.nCopies(motorcycleSpotsQty, null));
+        this.carParking = new ArrayList<Vehicle>(Collections.nCopies(carSpotsQty, null));
+        this.largeParking = new ArrayList<Vehicle>(Collections.nCopies(largeSpotsQty, null));
     }
 
-    public List<ParkingSpot.spotType> getMotorcycleParking() {
+    public List<Vehicle> getMotorcycleParking() {
         return motorcycleParking;
     }
 
-    public void setMotorcycleParking(List<ParkingSpot.spotType> motorcycleParking) {
-        this.motorcycleParking = motorcycleParking;
-    }
-
-    public List<ParkingSpot.spotType> getCarParking() {
+    public List<Vehicle> getCarParking() {
         return carParking;
     }
 
-    public void setCarParking(List<ParkingSpot.spotType> carParking) {
-        this.carParking = carParking;
-    }
-
-    public List<ParkingSpot.spotType> getLargeParking() {
+    public List<Vehicle> getLargeParking() {
         return largeParking;
     }
 
-    public void setLargeParking(List<ParkingSpot.spotType> largeParking) {
+    public void setMotorcycleParking(List<Vehicle> motorcycleParking) {
+        this.motorcycleParking = motorcycleParking;
+    }
+
+    public void setCarParking(List<Vehicle> carParking) {
+        this.carParking = carParking;
+    }
+
+    public void setLargeParking(List<Vehicle> largeParking) {
         this.largeParking = largeParking;
     }
+
+    @Override
+    public String toString() {
+        return "ParkingLot{" +
+                "motorcycleParking=" + motorcycleParking + "\n" +
+                ", carParking=" + carParking + "\n" +
+                ", largeParking=" + largeParking +
+                '}';
+    }
+
+    public void parkVehicle(Vehicle vehicle) {
+        int firstAvailableMotorcycleParking = getMotorcycleParking().indexOf(null);
+        int firstAvailableCarParking = getCarParking().indexOf(null);
+        int firstAvailableLargeParking = getLargeParking().indexOf(null);
+
+        boolean isMotorcycle = vehicle.getType().equals(Vehicle.vehicleType.MOTORCYCLE);
+        boolean isCar = vehicle.getType().equals(Vehicle.vehicleType.CAR);
+        boolean isVan = vehicle.getType().equals(Vehicle.vehicleType.VAN);
+
+        if (firstAvailableMotorcycleParking >= 0 && isMotorcycle) {
+            getMotorcycleParking().set(firstAvailableMotorcycleParking, vehicle);
+        } else if (firstAvailableCarParking >= 0 && (isMotorcycle || isCar)) {
+            getCarParking().set(firstAvailableCarParking, vehicle);
+        } else if (firstAvailableLargeParking >= 0 && (isMotorcycle || isCar || isVan)) {
+            if (isVan && (firstAvailableLargeParking + 3) < getLargeParking().size()) {
+                for (int i = 0; i < 3; i++) {
+                    int firstAvailableLargeParkingInner = getLargeParking().indexOf(null);
+                    getLargeParking().set(firstAvailableLargeParkingInner, vehicle);
+                }
+            } else if (isMotorcycle || isCar) {
+                getLargeParking().set(firstAvailableLargeParking, vehicle);
+            } else {
+                System.out.println("Your van is too big, there is no more space. Get out of here!");
+            }
+        } else if (firstAvailableLargeParking < 0 && (isMotorcycle || isCar || isVan)) {
+            System.out.println("Unfortunately the parking is currently full");
+        } else {
+            System.out.println("Unfortunately our lovely parking does not support that strange vehicle, go somewhere else.");
+        }
+    }
+
 }
 
 ;
