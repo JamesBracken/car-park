@@ -3,6 +3,8 @@ package org.parking.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class ParkingLot {
     private List<Vehicle> motorcycleParking;
@@ -79,6 +81,23 @@ public class ParkingLot {
         }
     }
 
+    public String showParkingSpaces() {
+        return String.format("Motorcycle spaces: %d \n" +
+                "Car spaces: %d \n" +
+                "Large vehicle spaces: %d \n" +
+                "Total spaces: %d", showMotorcycleSpaces(),  showCarSpaces(), showLargeSpaces(), showMotorcycleSpaces() + showCarSpaces() + showLargeSpaces());
+    }
+    public Long showMotorcycleSpaces() {
+        return getMotorcycleParking().stream().filter(Objects::isNull).count();
+    }
+
+    public Long showCarSpaces() {
+        return getCarParking().stream().filter(Objects::isNull).count();
+    }
+
+    public Long showLargeSpaces() {
+        return getLargeParking().stream().filter(Objects::isNull).count();
+    }
 }
 
 ;

@@ -19,12 +19,17 @@ public class ParkingMain {
 
         VehicleFactory myFactory = new VehicleFactory();
         List<Vehicle> myGarage = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 10; i++) {
             myParkingLot.parkVehicle(myFactory.createRandomVehicle());
         }
 
 
         System.out.println("myParkingLot: " + myParkingLot);
+        System.out.println("myParkingLot showMotorcycleSpaces: " + myParkingLot.showMotorcycleSpaces());
+        System.out.println("myParkingLot showCarSpaces: " + myParkingLot.showCarSpaces());
+        System.out.println("myParkingLot showLargeSpaces: " + myParkingLot.showLargeSpaces());
+        System.out.println("myParkingLot showParkingSpaces \n" + myParkingLot.showParkingSpaces());
+
     }
 }
 
@@ -37,8 +42,8 @@ public class ParkingMain {
 // Create all vehicle classes extending the vehicle class FINISHED
 // Create a vehicle factory which will generate vehicles which we will later use to populate the parking FINISHED
 //
-// Create a method which tells us how many spots are remaining
-// Create a method which tells us how many total spots are in the parking lot
+// Create a method which tells us how many spots are remaining FINISHED
+// Create a method which tells us how many total spots are in the parking lot FINISHED
 // Create a method which tells us when the parking lot is full
 // Create a method which tells us when the parking lot is empty
 // Create a method which tells us when certain spots are full e.g. when all motorcycle spots are taken
