@@ -1,10 +1,6 @@
 package org.parking.model;
 
 import java.util.*;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.atomic.AtomicInteger;
-
-import static org.parking.model.ParkingSpot.spotType.MOTORCYCLE;
 
 public class ParkingLot {
     private List<Vehicle> motorcycleParking;
@@ -59,8 +55,6 @@ public class ParkingLot {
         boolean isCar = vehicle.getType().equals(Vehicle.vehicleType.CAR);
         boolean isVan = vehicle.getType().equals(Vehicle.vehicleType.VAN);
 
-//        if (isParkingLotFull()) displayFullParking();
-
         if (firstAvailableMotorcycleParking >= 0 && isMotorcycle) {
             getMotorcycleParking().set(firstAvailableMotorcycleParking, vehicle);
         } else if (firstAvailableCarParking >= 0 && (isMotorcycle || isCar)) {
@@ -79,11 +73,6 @@ public class ParkingLot {
         } else if (isMotorcycle || isCar || isVan) {
             System.out.println("We dont currently have space for your vehicle");
         } else {
-            System.out.println("isParkingLotFull(): " + isParkingLotFull());
-            System.out.println(" isMotorcycle(): " + isMotorcycle);
-            System.out.println("isCar(): " + isCar);
-            System.out.println("isVan(): " + isVan);
-
             System.out.println("Unfortunately our lovely parking does not support that strange vehicle: " + vehicle.getType() +  ", go somewhere else.");
         }
     }
@@ -124,7 +113,6 @@ public class ParkingLot {
     }
 
     public boolean isParkingLotEmpty() {
-//        boolean isMotorcycleParkingEmpty = getMotorcycleParking().indexOf(Vehicle.vehicleType.MOTORCYCLE || Vehicle.vehicleType.CAR)
         return isMotorcycleParkingEmpty() && isCarParkingEmpty() && isLargeParkingEmpty();
     }
 
@@ -144,11 +132,3 @@ public class ParkingLot {
         return (int) getLargeParking().stream().filter(vehicle -> vehicle.getType() == Vehicle.vehicleType.VAN).count();
     }
 }
-
-;
-//    public parkCar;
-//    public parkVan;
-
-//    public exitMotorcycle;
-//    public exitCar;
-//    public exitVan;

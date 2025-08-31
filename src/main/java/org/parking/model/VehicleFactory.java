@@ -8,6 +8,7 @@ public class VehicleFactory {
     private final Random random = new Random();
 
     public Vehicle createRandomVehicle() {
+        // IMPLEMENT A SWITCH INSTEAD TO GENERATE THE RANDOMLY SELECTED VEHICLE
         return new Vehicle(licensePlateGenerator(), randomVehicleSelector());
     }
 

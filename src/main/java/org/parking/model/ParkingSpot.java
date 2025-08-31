@@ -1,28 +1,18 @@
 package org.parking.model;
 
 public class ParkingSpot {
-    private spotType type;
+    private SpotType type;
 
 
-    public ParkingSpot(spotType type) {
+    public ParkingSpot(SpotType type) {
         this.type = type;
     }
 
-    public spotType getType() {
+    public SpotType getType() {
         return type;
     }
 
-    public void setType(spotType type) {
+    public void setType(SpotType type) {
         this.type = type;
     }
-
-    public enum spotType {
-        MOTORCYCLE,
-        CAR,
-        LARGE
-    }
 }
-
-
-// Create a class ParkingSpot
-// Add motorcycle, car, large enums as spotType to parkingSpot
