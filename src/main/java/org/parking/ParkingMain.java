@@ -12,42 +12,28 @@ public class ParkingMain {
 
         ParkingLot myParkingLot = new ParkingLot(10, 10, 20);
 
-//        System.out.println(myParkingLot.getCarParking());
-//        System.out.println(myParkingLot.getMotorcycleParking());
-//        System.out.println(myParkingLot.getLargeParking());
-//        TESTING ------------------------------------
-
         VehicleFactory myFactory = new VehicleFactory();
         List<Vehicle> myGarage = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 100; i++) {
             myParkingLot.parkVehicle(myFactory.createRandomVehicle());
         }
-
 
         System.out.println("myParkingLot: " + myParkingLot);
         System.out.println("myParkingLot showMotorcycleSpaces: " + myParkingLot.showMotorcycleSpaces());
         System.out.println("myParkingLot showCarSpaces: " + myParkingLot.showCarSpaces());
         System.out.println("myParkingLot showLargeSpaces: " + myParkingLot.showLargeSpaces());
         System.out.println("myParkingLot showParkingSpaces \n" + myParkingLot.showParkingSpaces());
+        System.out.println("myParkingLot isParkingLotFull \n" + myParkingLot.isParkingLotFull());
+        System.out.println("myParkingLot isParkingLotEmpty \n" + myParkingLot.isParkingLotEmpty());
+        System.out.println("myParkingLot isMotorcycleParkingEmpty \n" + myParkingLot.isMotorcycleParkingEmpty());
+        System.out.println("myParkingLot isCarParkingEmpty \n" + myParkingLot.isCarParkingEmpty());
+        System.out.println("myParkingLot isLargeParkingEmpty \n" + myParkingLot.isLargeParkingEmpty());
 
+        System.out.println("myParkingLot showLargeSpaces: " + myParkingLot.showLargeSpaces());
+        System.out.println("myParkingLot getSpaceVansUse \n" + myParkingLot.getSpaceVansUse());
     }
 }
 
-// Create a class ParkingLot FINISHED
-// Create a class ParkingSpot FINISHED
-// Add motorcycle, car, large enums as spotType to parkingSpot FINISHED
-// Add motorcycleParking, carParking and largeParking to ParkingLot FINISHED
-// Create each field as a list to contain ParkingSpot to dictate if parking is taken FINISHED
-// Create an abstract class of vehicle with relevant fields - licensePlate and vehicleType FINISHED
-// Create all vehicle classes extending the vehicle class FINISHED
-// Create a vehicle factory which will generate vehicles which we will later use to populate the parking FINISHED
-//
-// Create a method which tells us how many spots are remaining FINISHED
-// Create a method which tells us how many total spots are in the parking lot FINISHED
-// Create a method which tells us when the parking lot is full
-// Create a method which tells us when the parking lot is empty
-// Create a method which tells us when certain spots are full e.g. when all motorcycle spots are taken
-// Create a method which tells us how many spots vans are taking up
 //
 //
 //

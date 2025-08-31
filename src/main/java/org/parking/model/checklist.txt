@@ -3,12 +3,16 @@
 // Add motorcycle, car, large enums as spotType to parkingSpot FINISHED
 // Add motorcycleParking, carParking and largeParking to ParkingLot FINISHED
 // Create each field as a list to contain ParkingSpot to dictate if parking is taken FINISHED
-// Create a method which tells us how many spots are remaining
-// Create a method which tells us how many total spots are in the parking lot
-// Create a method which tells us when the parking lot is full
-// Create a method which tells us when the parking lot is empty
-// Create a method which tells us when certain spots are full e.g. when all motorcycle spots are taken
-// Create a method which tells us how many spots vans are taking up
+// Create an abstract class of vehicle with relevant fields - licensePlate and vehicleType FINISHED
+// Create all vehicle classes extending the vehicle class FINISHED
+// Create a vehicle factory which will generate vehicles which we will later use to populate the parking FINISHED
+//
+// Create a method which tells us how many spots are remaining FINISHED
+// Create a method which tells us how many total spots are in the parking lot FINISHED
+// Create a method which tells us when the parking lot is full FINISHED
+// Create a method which tells us when the parking lot is empty FINISHED
+// Create a method which tells us when certain spots are full e.g. when all motorcycle spots are taken FINISHED
+// Create a method which tells us how many spots vans are taking up FINISHED
 //
 //
 //
