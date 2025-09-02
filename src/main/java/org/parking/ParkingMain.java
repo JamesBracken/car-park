@@ -14,9 +14,14 @@ public class ParkingMain {
 
         VehicleFactory myFactory = new VehicleFactory();
         List<Vehicle> myGarage = new ArrayList<>();
-        for (int i = 0; i < 115; i++) {
-            myParkingLot.parkVehicle(myFactory.createRandomVehicle());
+        for (int i = 0; i < 5; i++) {
+//            myParkingLot.parkVehicle(myFactory.createRandomVehicle());
+            myParkingLot.parkVehicle(myFactory.createVehicle(Vehicle.vehicleType.VAN));
+            myParkingLot.parkVehicle(myFactory.createVehicle(Vehicle.vehicleType.CAR));
+            myParkingLot.parkVehicle(myFactory.createVehicle(Vehicle.vehicleType.MOTORCYCLE));
         }
+
+        System.out.println("Vehicle.vehicleType.values().length: " + Vehicle.vehicleType.values().length);
 
 //        System.out.println("myParkingLot: " + myParkingLot);
 //        System.out.println("myParkingLot showMotorcycleSpaces: " + myParkingLot.showMotorcycleSpaces());

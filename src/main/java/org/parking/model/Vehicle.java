@@ -1,7 +1,7 @@
 package org.parking.model;
 
 public class Vehicle {
-    private StringBuilder licensePlate;
+    private String licensePlate;
     private vehicleType type;
 
     public enum vehicleType {
@@ -18,16 +18,16 @@ public class Vehicle {
         this.type = type;
     }
 
-    public Vehicle(StringBuilder licensePlate, vehicleType type) {
+    public Vehicle(String licensePlate, vehicleType type) {
         this.licensePlate = licensePlate;
         this.type = type;
     }
 
-    public StringBuilder getLicensePlate() {
+    public String getLicensePlate() {
         return licensePlate;
     }
 
-    public void setLicensePlate(StringBuilder licensePlate) {
+    public void setLicensePlate(String licensePlate) {
         this.licensePlate = licensePlate;
     }
 

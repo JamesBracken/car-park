@@ -7,17 +7,22 @@ import java.util.Random;
 public class VehicleFactory {
     private final Random random = new Random();
 
+    public Vehicle createVehicle(Vehicle.vehicleType type){
+        return new Vehicle(licensePlateGenerator(), type);
+    }
+
+    //This does not conform to factory best practices, but used this only during development
     public Vehicle createRandomVehicle() {
-        // IMPLEMENT A SWITCH INSTEAD TO GENERATE THE RANDOMLY SELECTED VEHICLE
         return new Vehicle(licensePlateGenerator(), randomVehicleSelector());
     }
 
+    //This does not conform to factory best practices, but used this only during development
     public Vehicle.vehicleType randomVehicleSelector() {
         List<Vehicle.vehicleType> vehicleTypes = Arrays.asList(Vehicle.vehicleType.values());
-        return vehicleTypes.get(random.nextInt(3));
+        return vehicleTypes.get(random.nextInt(Vehicle.vehicleType.values().length));
     }
 
-    public StringBuilder licensePlateGenerator() {
+    public String licensePlateGenerator() {
         StringBuilder licensePlate = new StringBuilder();
         // ASCII ALPHABET DECIMALS  - 65-90
         for (int i = 0; i < 3; i++) {
@@ -30,6 +35,7 @@ public class VehicleFactory {
             licensePlate.append((char) (randIntForNums + 48));
         }
 
-        return licensePlate;
+        return licensePlate.toString();
     }
+
 }
