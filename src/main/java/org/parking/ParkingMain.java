@@ -14,28 +14,27 @@ public class ParkingMain {
 
         VehicleFactory myFactory = new VehicleFactory();
         List<Vehicle> myGarage = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 3; i++) {
 //            myParkingLot.parkVehicle(myFactory.createRandomVehicle());
             myParkingLot.parkVehicle(myFactory.createVehicle(Vehicle.vehicleType.VAN));
             myParkingLot.parkVehicle(myFactory.createVehicle(Vehicle.vehicleType.CAR));
             myParkingLot.parkVehicle(myFactory.createVehicle(Vehicle.vehicleType.MOTORCYCLE));
         }
 
-        System.out.println("Vehicle.vehicleType.values().length: " + Vehicle.vehicleType.values().length);
+//        System.out.println("Vehicle.vehicleType.values().length: " + Vehicle.vehicleType.values().length);
 
-//        System.out.println("myParkingLot: " + myParkingLot);
-//        System.out.println("myParkingLot showMotorcycleSpaces: " + myParkingLot.showMotorcycleSpaces());
-//        System.out.println("myParkingLot showCarSpaces: " + myParkingLot.showCarSpaces());
-//        System.out.println("myParkingLot showLargeSpaces: " + myParkingLot.showLargeSpaces());
-//        System.out.println("myParkingLot showParkingSpaces \n" + myParkingLot.showParkingSpaces());
-//        System.out.println("myParkingLot isParkingLotFull \n" + myParkingLot.isParkingLotFull());
-//        System.out.println("myParkingLot isParkingLotEmpty \n" + myParkingLot.isParkingLotEmpty());
-//        System.out.println("myParkingLot isMotorcycleParkingEmpty \n" + myParkingLot.isMotorcycleParkingEmpty());
-//        System.out.println("myParkingLot isCarParkingEmpty \n" + myParkingLot.isCarParkingEmpty());
-//        System.out.println("myParkingLot isLargeParkingEmpty \n" + myParkingLot.isLargeParkingEmpty());
-
-//        System.out.println("myParkingLot showLargeSpaces: " + myParkingLot.showLargeSpaces());
-//        System.out.println("myParkingLot getSpaceVansUse \n" + myParkingLot.getSpaceVansUse());
+//        System.out.println("showParkingSpaces: " + myParkingLot.showParkingSpaces());
+//        System.out.println("isParkingLotEmpty: " + myParkingLot.isParkingLotEmpty());
+        System.out.println("getSpaceVansUse: " + myParkingLot.getSpaceVansUse());
+//        System.out.println("TESTING: " + myParkingLot.getLargeParking().stream().filter(largeSpot -> {
+//            if(!largeSpot.isEmpty()) {
+//                return largeSpot.getVehicle().getType() == Vehicle.vehicleType.VAN;
+//            }
+//            return false;
+//        }).count());
+//        System.out.println("TESTING: " + (int) getLargeParking().stream().filter(spot -> if(spot) spot.getVehicle().getType() == Vehicle.vehicleType.VAN).count());
+        System.out.println();
+        System.out.println();
     }
 }
 

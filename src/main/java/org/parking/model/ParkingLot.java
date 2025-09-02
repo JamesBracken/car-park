@@ -72,11 +72,6 @@ public class ParkingLot {
     }
 
     public void parkVehicle(Vehicle vehicle) throws NoSuchElementException {
-//        int firstAvailableMotorcycleParking = getMotorcycleParking().indexOf(null);
-//        MotorcycleSpot firstAvailableMotorcycleParking = getMotorcycleParking().stream().filter(ParkingSpot::isEmpty).findFirst().get();
-//        CarSpot firstAvailableCarParking = getCarParking().stream().filter(ParkingSpot::isEmpty).findFirst().get();
-//        LargeSpot firstAvailableLargeParking = getLargeParking().stream().filter(ParkingSpot::isEmpty).findFirst().get();
-
 
         Optional<CompactSpot> firstAvailableMotorcycleParking = getMotorcycleParking().stream()
                 .filter(ParkingSpot::isEmpty).findFirst();
@@ -84,7 +79,6 @@ public class ParkingLot {
                 .filter(ParkingSpot::isEmpty).findFirst();
         Optional<LargeSpot> firstAvailableLargeParking = getLargeParking().stream()
                 .filter(ParkingSpot::isEmpty).findFirst();
-
 
         boolean isMotorcycle = vehicle.getType().equals(Vehicle.vehicleType.MOTORCYCLE);
         boolean isCar = vehicle.getType().equals(Vehicle.vehicleType.CAR);
@@ -141,12 +135,13 @@ public class ParkingLot {
                     System.out.println("All our Large and Standard spaces are taken :(");
                 }
             }
-            default -> System.out.println("Unfortunately our car park does not support this strange vehicle, go elsewhere!");
+            default ->
+                    System.out.println("Unfortunately our car park does not support this strange vehicle, go elsewhere!");
         }
-        System.out.println(vehicle.getType());
-        System.out.println("getMotorcycleParking: " + getMotorcycleParking());
-        System.out.println("getCarParking: " + getCarParking());
-        System.out.println("getLargeParking: " + getLargeParking());
+
+//        System.out.println(getMotorcycleParking());
+//        System.out.println(getCarParking());
+//        System.out.println(getLargeParking());
     }
 
     public String showParkingSpaces() {
@@ -160,15 +155,15 @@ public class ParkingLot {
     }
 
     public Long showMotorcycleSpaces() {
-        return getMotorcycleParking().stream().filter(Objects::isNull).count();
+        return getMotorcycleParking().stream().filter(ParkingSpot::isEmpty).count();
     }
 
     public Long showCarSpaces() {
-        return getCarParking().stream().filter(Objects::isNull).count();
+        return getCarParking().stream().filter(ParkingSpot::isEmpty).count();
     }
 
     public Long showLargeSpaces() {
-        return getLargeParking().stream().filter(Objects::isNull).count();
+        return getLargeParking().stream().filter(ParkingSpot::isEmpty).count();
     }
 
     public boolean isParkingLotFull() {
@@ -185,23 +180,20 @@ public class ParkingLot {
     }
 
     public boolean isParkingLotEmpty() {
-        return isMotorcycleParkingEmpty() && isCarParkingEmpty() && isLargeParkingEmpty();
+        return showLargeSpaces() == 0 && showMotorcycleSpaces() == 0 && showCarSpaces() == 0;
     }
 
-    public boolean isMotorcycleParkingEmpty() {
-        return getMotorcycleParking().stream().noneMatch(Objects::nonNull);
-    }
+    public int getSpaceVansUse() {
+        return (int) getLargeParking().stream().filter(largeSpot -> {
+            if (!largeSpot.isEmpty()) {
+                return largeSpot.getVehicle().getType() == Vehicle.vehicleType.VAN;
+            }
+            return false;
+        }).count();
+//        return (int) getLargeParking().stream().filter(spot -> if(spot) spot.getVehicle().getType() == Vehicle.vehicleType.VAN).count();
+//        return (int) getLargeParking().stream().filter(spot -> vehicle.getType() == Vehicle.vehicleType.VAN).count();
 
-    public boolean isCarParkingEmpty() {
-        return getMotorcycleParking().stream().noneMatch(Objects::nonNull);
-    }
 
-    public boolean isLargeParkingEmpty() {
-        return getMotorcycleParking().stream().noneMatch(Objects::nonNull);
     }
-
-//    public int getSpaceVansUse() {
-//        return (int) getLargeParking().stream().filter(vehicle -> vehicle.getType() == Vehicle.vehicleType.VAN).count();
-//    }
 
 }
