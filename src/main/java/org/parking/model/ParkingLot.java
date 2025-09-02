@@ -3,37 +3,62 @@ package org.parking.model;
 import java.util.*;
 
 public class ParkingLot {
-    private List<Vehicle> motorcycleParking;
-    private List<Vehicle> carParking;
-    private List<Vehicle> largeParking;
+    private List<CompactSpot> motorcycleParking;
+    private List<StandardSpot> carParking;
+    private List<LargeSpot> largeParking;
 
     public ParkingLot(int motorcycleSpotsQty, int carSpotsQty, int largeSpotsQty) {
-        this.motorcycleParking = new ArrayList<Vehicle>(Collections.nCopies(motorcycleSpotsQty, null));
-        this.carParking = new ArrayList<Vehicle>(Collections.nCopies(carSpotsQty, null));
-        this.largeParking = new ArrayList<Vehicle>(Collections.nCopies(largeSpotsQty, null));
+        this.motorcycleParking = new ArrayList<>();
+        this.carParking = new ArrayList<>();
+        this.largeParking = new ArrayList<>();
+        generateParkingLotSpots(motorcycleSpotsQty, carSpotsQty, largeSpotsQty);
     }
 
-    public List<Vehicle> getMotorcycleParking() {
+    public void generateParkingLotSpots(int motorcycleSpotsQty, int carSpotsQty, int largeSpotsQty) {
+        motorcycleSpotGenerator(motorcycleSpotsQty);
+        carSpotGenerator(carSpotsQty);
+        largeSpotGenerator(largeSpotsQty);
+    }
+
+    public void motorcycleSpotGenerator(int quantity) {
+        for (int i = 0; i < quantity; i++) {
+            motorcycleParking.add(new CompactSpot());
+        }
+    }
+
+    public void carSpotGenerator(int quantity) {
+        for (int i = 0; i < quantity; i++) {
+            carParking.add(new StandardSpot());
+        }
+    }
+
+    public void largeSpotGenerator(int quantity) {
+        for (int i = 0; i < quantity; i++) {
+            largeParking.add(new LargeSpot());
+        }
+    }
+
+    public List<CompactSpot> getMotorcycleParking() {
         return motorcycleParking;
     }
 
-    public List<Vehicle> getCarParking() {
-        return carParking;
-    }
-
-    public List<Vehicle> getLargeParking() {
-        return largeParking;
-    }
-
-    public void setMotorcycleParking(List<Vehicle> motorcycleParking) {
+    public void setMotorcycleParking(List<CompactSpot> motorcycleParking) {
         this.motorcycleParking = motorcycleParking;
     }
 
-    public void setCarParking(List<Vehicle> carParking) {
+    public List<StandardSpot> getCarParking() {
+        return carParking;
+    }
+
+    public void setCarParking(List<StandardSpot> carParking) {
         this.carParking = carParking;
     }
 
-    public void setLargeParking(List<Vehicle> largeParking) {
+    public List<LargeSpot> getLargeParking() {
+        return largeParking;
+    }
+
+    public void setLargeParking(List<LargeSpot> largeParking) {
         this.largeParking = largeParking;
     }
 
