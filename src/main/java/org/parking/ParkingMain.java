@@ -10,27 +10,27 @@ import java.util.List;
 public class ParkingMain {
     public static void main(String[] args) {
 
-        ParkingLot myParkingLot = new ParkingLot(10, 10, 20);
+        ParkingLot myParkingLot = new ParkingLot(5, 5, 6);
 
         VehicleFactory myFactory = new VehicleFactory();
         List<Vehicle> myGarage = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 115; i++) {
             myParkingLot.parkVehicle(myFactory.createRandomVehicle());
         }
 
-        System.out.println("myParkingLot: " + myParkingLot);
-        System.out.println("myParkingLot showMotorcycleSpaces: " + myParkingLot.showMotorcycleSpaces());
-        System.out.println("myParkingLot showCarSpaces: " + myParkingLot.showCarSpaces());
-        System.out.println("myParkingLot showLargeSpaces: " + myParkingLot.showLargeSpaces());
-        System.out.println("myParkingLot showParkingSpaces \n" + myParkingLot.showParkingSpaces());
-        System.out.println("myParkingLot isParkingLotFull \n" + myParkingLot.isParkingLotFull());
-        System.out.println("myParkingLot isParkingLotEmpty \n" + myParkingLot.isParkingLotEmpty());
-        System.out.println("myParkingLot isMotorcycleParkingEmpty \n" + myParkingLot.isMotorcycleParkingEmpty());
-        System.out.println("myParkingLot isCarParkingEmpty \n" + myParkingLot.isCarParkingEmpty());
-        System.out.println("myParkingLot isLargeParkingEmpty \n" + myParkingLot.isLargeParkingEmpty());
+//        System.out.println("myParkingLot: " + myParkingLot);
+//        System.out.println("myParkingLot showMotorcycleSpaces: " + myParkingLot.showMotorcycleSpaces());
+//        System.out.println("myParkingLot showCarSpaces: " + myParkingLot.showCarSpaces());
+//        System.out.println("myParkingLot showLargeSpaces: " + myParkingLot.showLargeSpaces());
+//        System.out.println("myParkingLot showParkingSpaces \n" + myParkingLot.showParkingSpaces());
+//        System.out.println("myParkingLot isParkingLotFull \n" + myParkingLot.isParkingLotFull());
+//        System.out.println("myParkingLot isParkingLotEmpty \n" + myParkingLot.isParkingLotEmpty());
+//        System.out.println("myParkingLot isMotorcycleParkingEmpty \n" + myParkingLot.isMotorcycleParkingEmpty());
+//        System.out.println("myParkingLot isCarParkingEmpty \n" + myParkingLot.isCarParkingEmpty());
+//        System.out.println("myParkingLot isLargeParkingEmpty \n" + myParkingLot.isLargeParkingEmpty());
 
-        System.out.println("myParkingLot showLargeSpaces: " + myParkingLot.showLargeSpaces());
-        System.out.println("myParkingLot getSpaceVansUse \n" + myParkingLot.getSpaceVansUse());
+//        System.out.println("myParkingLot showLargeSpaces: " + myParkingLot.showLargeSpaces());
+//        System.out.println("myParkingLot getSpaceVansUse \n" + myParkingLot.getSpaceVansUse());
     }
 }
 

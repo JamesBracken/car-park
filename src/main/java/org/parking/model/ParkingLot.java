@@ -7,16 +7,16 @@ public class ParkingLot {
     private List<StandardSpot> carParking;
     private List<LargeSpot> largeParking;
 
-    public ParkingLot(int motorcycleSpotsQty, int carSpotsQty, int largeSpotsQty) {
+    public ParkingLot(int compactSpotsQty, int standardSpotsQty, int largeSpotsQty) {
         this.motorcycleParking = new ArrayList<>();
         this.carParking = new ArrayList<>();
         this.largeParking = new ArrayList<>();
-        generateParkingLotSpots(motorcycleSpotsQty, carSpotsQty, largeSpotsQty);
+        generateParkingLotSpots(compactSpotsQty, standardSpotsQty, largeSpotsQty);
     }
 
-    public void generateParkingLotSpots(int motorcycleSpotsQty, int carSpotsQty, int largeSpotsQty) {
-        motorcycleSpotGenerator(motorcycleSpotsQty);
-        carSpotGenerator(carSpotsQty);
+    public void generateParkingLotSpots(int compactSpotsQty, int standardSpotsQty, int largeSpotsQty) {
+        motorcycleSpotGenerator(compactSpotsQty);
+        carSpotGenerator(standardSpotsQty);
         largeSpotGenerator(largeSpotsQty);
     }
 
@@ -71,35 +71,82 @@ public class ParkingLot {
                 '}';
     }
 
-    public void parkVehicle(Vehicle vehicle) {
-        int firstAvailableMotorcycleParking = getMotorcycleParking().indexOf(null);
-        int firstAvailableCarParking = getCarParking().indexOf(null);
-        int firstAvailableLargeParking = getLargeParking().indexOf(null);
+    public void parkVehicle(Vehicle vehicle) throws NoSuchElementException {
+//        int firstAvailableMotorcycleParking = getMotorcycleParking().indexOf(null);
+//        MotorcycleSpot firstAvailableMotorcycleParking = getMotorcycleParking().stream().filter(ParkingSpot::isEmpty).findFirst().get();
+//        CarSpot firstAvailableCarParking = getCarParking().stream().filter(ParkingSpot::isEmpty).findFirst().get();
+//        LargeSpot firstAvailableLargeParking = getLargeParking().stream().filter(ParkingSpot::isEmpty).findFirst().get();
+
+
+        Optional<CompactSpot> firstAvailableMotorcycleParking = getMotorcycleParking().stream()
+                .filter(ParkingSpot::isEmpty).findFirst();
+        Optional<StandardSpot> firstAvailableCarParking = getCarParking().stream()
+                .filter(ParkingSpot::isEmpty).findFirst();
+        Optional<LargeSpot> firstAvailableLargeParking = getLargeParking().stream()
+                .filter(ParkingSpot::isEmpty).findFirst();
+
 
         boolean isMotorcycle = vehicle.getType().equals(Vehicle.vehicleType.MOTORCYCLE);
         boolean isCar = vehicle.getType().equals(Vehicle.vehicleType.CAR);
         boolean isVan = vehicle.getType().equals(Vehicle.vehicleType.VAN);
 
-        if (firstAvailableMotorcycleParking >= 0 && isMotorcycle) {
-            getMotorcycleParking().set(firstAvailableMotorcycleParking, vehicle);
-        } else if (firstAvailableCarParking >= 0 && (isMotorcycle || isCar)) {
-            getCarParking().set(firstAvailableCarParking, vehicle);
-        } else if (firstAvailableLargeParking >= 0 && (isMotorcycle || isCar || isVan)) {
-            if (isVan && (firstAvailableLargeParking + 3) < getLargeParking().size()) {
-                for (int i = 0; i < 3; i++) {
-                    int firstAvailableLargeParkingInner = getLargeParking().indexOf(null);
-                    getLargeParking().set(firstAvailableLargeParkingInner, vehicle);
+        switch (vehicle.getType()) {
+            case MOTORCYCLE -> {
+                if (firstAvailableMotorcycleParking.isPresent()) {
+                    firstAvailableMotorcycleParking.ifPresent(compactSpot -> {
+                        compactSpot.addVehicle(vehicle);
+                        firstAvailableMotorcycleParking.get().setEmpty(false);
+                    });
+                } else if (firstAvailableCarParking.isPresent()) {
+                    firstAvailableCarParking.ifPresent(standardSpot -> {
+                        standardSpot.addVehicle(vehicle);
+                        firstAvailableCarParking.get().setEmpty(false);
+                    });
+                } else if (firstAvailableLargeParking.isPresent()) {
+                    firstAvailableLargeParking.ifPresent(largeSpot -> {
+                        largeSpot.addVehicle(vehicle);
+                        firstAvailableLargeParking.get().setEmpty(false);
+                    });
+                } else {
+                    System.out.println("All our parking spots are full :(");
                 }
-            } else if (isMotorcycle || isCar) {
-                getLargeParking().set(firstAvailableLargeParking, vehicle);
-            } else {
-                System.out.println("Your van is too big, there is no more space. Get out of here!");
             }
-        } else if (isMotorcycle || isCar || isVan) {
-            System.out.println("We dont currently have space for your vehicle");
-        } else {
-            System.out.println("Unfortunately our lovely parking does not support that strange vehicle: " + vehicle.getType() +  ", go somewhere else.");
+            case CAR -> {
+                if (firstAvailableCarParking.isPresent()) {
+                    firstAvailableCarParking.ifPresent(standardSpot -> {
+                        standardSpot.addVehicle(vehicle);
+                        firstAvailableCarParking.get().setEmpty(false);
+                    });
+                } else if (firstAvailableLargeParking.isPresent()) {
+                    firstAvailableLargeParking.ifPresent(largeSpot -> {
+                        largeSpot.addVehicle(vehicle);
+                        firstAvailableLargeParking.get().setEmpty(false);
+                    });
+                } else {
+                    System.out.println("All our Standard and Large spaces are taken :(");
+                }
+            }
+            case VAN -> {
+                if (firstAvailableLargeParking.isPresent()) {
+                    firstAvailableLargeParking.ifPresent(largeSpot -> {
+                        largeSpot.addVehicle(vehicle);
+                        firstAvailableLargeParking.get().setEmpty(false);
+                    });
+                } else if (firstAvailableCarParking.isPresent()) {
+                    firstAvailableCarParking.ifPresent(standardSpot -> {
+                        standardSpot.addVehicle(vehicle);
+                        firstAvailableCarParking.get().setEmpty(false);
+                    });
+                } else {
+                    System.out.println("All our Large and Standard spaces are taken :(");
+                }
+            }
+            default -> System.out.println("Unfortunately our car park does not support this strange vehicle, go elsewhere!");
         }
+        System.out.println(vehicle.getType());
+        System.out.println("getMotorcycleParking: " + getMotorcycleParking());
+        System.out.println("getCarParking: " + getCarParking());
+        System.out.println("getLargeParking: " + getLargeParking());
     }
 
     public String showParkingSpaces() {
@@ -153,7 +200,8 @@ public class ParkingLot {
         return getMotorcycleParking().stream().noneMatch(Objects::nonNull);
     }
 
-    public int getSpaceVansUse() {
-        return (int) getLargeParking().stream().filter(vehicle -> vehicle.getType() == Vehicle.vehicleType.VAN).count();
-    }
+//    public int getSpaceVansUse() {
+//        return (int) getLargeParking().stream().filter(vehicle -> vehicle.getType() == Vehicle.vehicleType.VAN).count();
+//    }
+
 }
