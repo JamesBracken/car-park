@@ -1,7 +1,7 @@
 package org.parking.model;
 
 public enum SpotType {
-    MOTORCYCLE,
-    CAR,
+    COMPACT,
+    STANDARD,
     LARGE
 }
