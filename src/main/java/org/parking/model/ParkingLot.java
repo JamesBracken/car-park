@@ -133,18 +133,30 @@ public class ParkingLot {
                 }
             }
             case VAN -> {
+                int STANDARD_SPACE_FOR_VAN = 3;
+                long availableCarParkingsCount = getCarParking().stream()
+                        .filter(ParkingSpot::isEmpty).count();
+                System.out.println("availableCarParkingsCount: " + availableCarParkingsCount);
                 if (firstAvailableLargeParking.isPresent()) {
                     firstAvailableLargeParking.ifPresent(largeSpot -> {
                         largeSpot.addVehicle(vehicle);
                         firstAvailableLargeParking.get().setEmpty(false);
                         getParkedVehicles().put(vehicle, new HashSet<>(Set.of(largeSpot)));
                     });
-                } else if (firstAvailableCarParking.isPresent()) {
-                    firstAvailableCarParking.ifPresent(standardSpot -> {
-                        standardSpot.addVehicle(vehicle);
-                        firstAvailableCarParking.get().setEmpty(false);
-                        getParkedVehicles().put(vehicle, new HashSet<>(Set.of(standardSpot)));
-                    });
+                } else if (availableCarParkingsCount >= STANDARD_SPACE_FOR_VAN) {
+                    HashSet<ParkingSpot> standardSpotSet = new HashSet<>();
+
+                    for (int i = 0; i <= 2; i++) {
+                        Optional<StandardSpot> firstAvailableCarParkingInLoop = getCarParking().stream()
+                                .filter(ParkingSpot::isEmpty).findFirst();
+                        firstAvailableCarParkingInLoop.ifPresent(standardSpot -> {
+                            standardSpot.addVehicle(vehicle);
+                            standardSpotSet.add(standardSpot);
+                            firstAvailableCarParkingInLoop.ifPresent(spot -> spot.addVehicle(vehicle));
+                            firstAvailableCarParkingInLoop.get().setEmpty(false);
+                        });
+                        getParkedVehicles().put(vehicle, standardSpotSet);
+                    }
                 } else {
                     System.out.println("All our Large and Standard spaces are taken :(");
                 }
@@ -223,6 +235,16 @@ public class ParkingLot {
 
         } else if (!getVehicleStandardSpot.equals(Optional.empty())) {
             // Account for vans taking 3 standard spaces
+
+            if (vehicle.getType().equals(Vehicle.vehicleType.VAN)) {
+                for (int i = 0; i < 3; i++) {
+                    Optional<StandardSpot> getVehicleStandardSpotInLoop = getCarParking().stream().filter(standardSpot -> standardSpot.getVehicle() == vehicle).findFirst();
+                    getVehicleStandardSpotInLoop.get().setEmpty(true);
+                    getVehicleStandardSpotInLoop.get().removeVehicle();
+                }
+                getParkedVehicles().remove(vehicle);
+                return;
+            }
 
             getVehicleStandardSpot.get().setEmpty(true);
             getVehicleStandardSpot.get().removeVehicle();
