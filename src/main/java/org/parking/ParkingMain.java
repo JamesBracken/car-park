@@ -14,7 +14,7 @@ public class ParkingMain {
 
         VehicleFactory myFactory = new VehicleFactory();
         List<Vehicle> myGarage = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 1; i++) {
 //            myParkingLot.parkVehicle(myFactory.createRandomVehicle());
             myParkingLot.parkVehicle(myFactory.createVehicle(Vehicle.vehicleType.VAN));
             myParkingLot.parkVehicle(myFactory.createVehicle(Vehicle.vehicleType.CAR));
@@ -33,8 +33,22 @@ public class ParkingMain {
 //            return false;
 //        }).count());
 //        System.out.println("TESTING: " + (int) getLargeParking().stream().filter(spot -> if(spot) spot.getVehicle().getType() == Vehicle.vehicleType.VAN).count());
-        System.out.println();
-        System.out.println();
+        System.out.println("getParkedVehicles: " + myParkingLot.getParkedVehicles());
+//        System.out.println("exitVehicle: " + myParkingLot.exitVehicle(myParkingLot.getMotorcycleParking().stream()
+//                .filter(ParkingSpot::isEmpty).findFirst().get().getVehicle()));
+//        System.out.println("exitVehicle: " + myParkingLot.exitVehicle(myParkingLot.getMotorcycleParking().get(0).getVehicle()));
+//        System.out.println("exitVehicle: " + myParkingLot.getMotorcycleParking().stream()
+//                .filter(ParkingSpot::isEmpty).findFirst().get().getVehicle());
+
+        myParkingLot.parkVehicle(myFactory.createVehicle(Vehicle.vehicleType.MOTORCYCLE));
+
+        Vehicle myVehicle = myFactory.createVehicle(Vehicle.vehicleType.MOTORCYCLE);
+
+        myParkingLot.parkVehicle(myVehicle);
+
+        System.out.println("Exit Vehicle: " + myVehicle);
+        System.out.println(myParkingLot.getMotorcycleParking());
+        myParkingLot.exitVehicle(myVehicle);
     }
 }
 

@@ -6,6 +6,11 @@ public class ParkingLot {
     private List<CompactSpot> motorcycleParking;
     private List<StandardSpot> carParking;
     private List<LargeSpot> largeParking;
+    Map<Vehicle, Set<ParkingSpot>> parkedVehicles = new HashMap<>();
+
+    public Map<Vehicle, Set<ParkingSpot>> getParkedVehicles() {
+        return parkedVehicles;
+    }
 
     public ParkingLot(int compactSpotsQty, int standardSpotsQty, int largeSpotsQty) {
         this.motorcycleParking = new ArrayList<>();
@@ -90,31 +95,38 @@ public class ParkingLot {
                     firstAvailableMotorcycleParking.ifPresent(compactSpot -> {
                         compactSpot.addVehicle(vehicle);
                         firstAvailableMotorcycleParking.get().setEmpty(false);
+                        getParkedVehicles().put(vehicle, new HashSet<>(Set.of(compactSpot)));
                     });
                 } else if (firstAvailableCarParking.isPresent()) {
                     firstAvailableCarParking.ifPresent(standardSpot -> {
                         standardSpot.addVehicle(vehicle);
                         firstAvailableCarParking.get().setEmpty(false);
+                        getParkedVehicles().put(vehicle, new HashSet<>(Set.of(standardSpot)));
                     });
                 } else if (firstAvailableLargeParking.isPresent()) {
                     firstAvailableLargeParking.ifPresent(largeSpot -> {
                         largeSpot.addVehicle(vehicle);
                         firstAvailableLargeParking.get().setEmpty(false);
+                        getParkedVehicles().put(vehicle, new HashSet<>(Set.of(largeSpot)));
                     });
                 } else {
                     System.out.println("All our parking spots are full :(");
                 }
+
+
             }
             case CAR -> {
                 if (firstAvailableCarParking.isPresent()) {
                     firstAvailableCarParking.ifPresent(standardSpot -> {
                         standardSpot.addVehicle(vehicle);
                         firstAvailableCarParking.get().setEmpty(false);
+                        getParkedVehicles().put(vehicle, new HashSet<>(Set.of(standardSpot)));
                     });
                 } else if (firstAvailableLargeParking.isPresent()) {
                     firstAvailableLargeParking.ifPresent(largeSpot -> {
                         largeSpot.addVehicle(vehicle);
                         firstAvailableLargeParking.get().setEmpty(false);
+                        getParkedVehicles().put(vehicle, new HashSet<>(Set.of(largeSpot)));
                     });
                 } else {
                     System.out.println("All our Standard and Large spaces are taken :(");
@@ -125,11 +137,13 @@ public class ParkingLot {
                     firstAvailableLargeParking.ifPresent(largeSpot -> {
                         largeSpot.addVehicle(vehicle);
                         firstAvailableLargeParking.get().setEmpty(false);
+                        getParkedVehicles().put(vehicle, new HashSet<>(Set.of(largeSpot)));
                     });
                 } else if (firstAvailableCarParking.isPresent()) {
                     firstAvailableCarParking.ifPresent(standardSpot -> {
                         standardSpot.addVehicle(vehicle);
                         firstAvailableCarParking.get().setEmpty(false);
+                        getParkedVehicles().put(vehicle, new HashSet<>(Set.of(standardSpot)));
                     });
                 } else {
                     System.out.println("All our Large and Standard spaces are taken :(");
@@ -190,10 +204,39 @@ public class ParkingLot {
             }
             return false;
         }).count();
-//        return (int) getLargeParking().stream().filter(spot -> if(spot) spot.getVehicle().getType() == Vehicle.vehicleType.VAN).count();
-//        return (int) getLargeParking().stream().filter(spot -> vehicle.getType() == Vehicle.vehicleType.VAN).count();
-
-
     }
 
+    public void exitVehicle(Vehicle vehicle) {
+        Optional<CompactSpot> getVehicleCompactSpot = getMotorcycleParking().stream().filter(compactSpot -> compactSpot.getVehicle() == vehicle).findFirst();
+        Optional<StandardSpot> getVehicleStandardSpot = getCarParking().stream().filter(standardSpot -> standardSpot.getVehicle() == vehicle).findFirst();
+        Optional<LargeSpot> getVehicleLargeSpot = getLargeParking().stream().filter(largeSpot -> largeSpot.getVehicle() == vehicle).findFirst();
+
+        System.out.println("getVehicleCompactSpot: " + getVehicleCompactSpot);
+        System.out.println("getVehicleStandardSpot: " + getVehicleStandardSpot);
+        System.out.println("getVehicleLargeSpot: " + getVehicleLargeSpot);
+
+        if (!getVehicleCompactSpot.equals(Optional.empty())) {
+
+            getVehicleCompactSpot.get().setEmpty(true);
+            getVehicleCompactSpot.get().removeVehicle();
+            getParkedVehicles().remove(vehicle);
+
+        } else if (!getVehicleStandardSpot.equals(Optional.empty())) {
+            // Account for vans taking 3 standard spaces
+
+            getVehicleStandardSpot.get().setEmpty(true);
+            getVehicleStandardSpot.get().removeVehicle();
+            getParkedVehicles().remove(vehicle);
+
+        } else if (!getVehicleLargeSpot.equals(Optional.empty())) {
+            getVehicleLargeSpot.get().setEmpty(true);
+            getVehicleLargeSpot.get().removeVehicle();
+            getParkedVehicles().remove(vehicle);
+
+        }
+
+        System.out.println("getVehicleCompactSpot: " + getVehicleCompactSpot);
+        System.out.println("getVehicleStandardSpot: " + getVehicleStandardSpot);
+        System.out.println("getVehicleLargeSpot: " + getVehicleLargeSpot);
+    }
 }

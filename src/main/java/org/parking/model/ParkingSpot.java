@@ -16,12 +16,16 @@ public abstract class ParkingSpot {
         return this.vehicle;
     }
 
+    public void removeVehicle() {
+        this.vehicle = null;
+    }
+
     public boolean isEmpty() {
         return isEmpty;
     }
 
     public void setEmpty(boolean empty) {
-        isEmpty = empty;
+        this.isEmpty = empty;
     }
 
     public boolean isFilled() {
