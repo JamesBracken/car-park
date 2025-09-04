@@ -1,4 +1,10 @@
-package org.parking.model;
+package org.parking;
+
+import org.parking.spots.CompactSpot;
+import org.parking.spots.LargeSpot;
+import org.parking.spots.ParkingSpot;
+import org.parking.spots.StandardSpot;
+import org.parking.vehicles.Vehicle;
 
 import java.util.*;
 

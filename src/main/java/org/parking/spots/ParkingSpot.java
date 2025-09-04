@@ -1,8 +1,9 @@
-package org.parking.model;
+package org.parking.spots;
+
+import org.parking.vehicles.Vehicle;
 
 public abstract class ParkingSpot {
     private boolean isEmpty = true;
-    private boolean isFilled = false;
     private Vehicle vehicle = null;
 
     public abstract SpotType getSpotType();
@@ -28,19 +29,10 @@ public abstract class ParkingSpot {
         this.isEmpty = empty;
     }
 
-    public boolean isFilled() {
-        return isFilled;
-    }
-
-    public void setFilled(boolean filled) {
-        isFilled = filled;
-    }
-
     @Override
     public String toString() {
         return "ParkingSpot{" +
                 "isEmpty=" + isEmpty +
-                ", isFilled=" + isFilled +
                 ", vehicle=" + vehicle +
                 '}';
     }

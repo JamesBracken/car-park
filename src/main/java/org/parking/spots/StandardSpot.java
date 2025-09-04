@@ -1,6 +1,8 @@
-package org.parking.model;
+package org.parking.spots;
 
-public class StandardSpot extends ParkingSpot{
+import org.parking.vehicles.Vehicle;
+
+public class StandardSpot extends ParkingSpot {
 
     @Override
     public SpotType getSpotType() {

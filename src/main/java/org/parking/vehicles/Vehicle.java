@@ -1,8 +1,8 @@
-package org.parking.model;
+package org.parking.vehicles;
 
 public class Vehicle {
-    private String licensePlate;
-    private vehicleType type;
+    private final String licensePlate;
+    private final vehicleType type;
 
     public enum vehicleType {
         MOTORCYCLE,
@@ -14,21 +14,9 @@ public class Vehicle {
         return type;
     }
 
-    public void setType(vehicleType type) {
-        this.type = type;
-    }
-
     public Vehicle(String licensePlate, vehicleType type) {
         this.licensePlate = licensePlate;
         this.type = type;
-    }
-
-    public String getLicensePlate() {
-        return licensePlate;
-    }
-
-    public void setLicensePlate(String licensePlate) {
-        this.licensePlate = licensePlate;
     }
 
     @Override

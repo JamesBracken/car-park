@@ -1,4 +1,4 @@
-package org.parking.model;
+package org.parking.vehicles;
 
 import java.util.Arrays;
 import java.util.List;
@@ -8,6 +8,7 @@ public class VehicleFactory {
     private final Random random = new Random();
 
     public Vehicle createVehicle(Vehicle.vehicleType type){
+        
         return new Vehicle(licensePlateGenerator(), type);
     }
 
@@ -34,7 +35,6 @@ public class VehicleFactory {
             int randIntForNums = random.nextInt(10);
             licensePlate.append((char) (randIntForNums + 48));
         }
-
         return licensePlate.toString();
     }
 
