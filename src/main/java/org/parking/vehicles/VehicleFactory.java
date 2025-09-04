@@ -8,8 +8,19 @@ public class VehicleFactory {
     private final Random random = new Random();
 
     public Vehicle createVehicle(Vehicle.vehicleType type){
-        
-        return new Vehicle(licensePlateGenerator(), type);
+
+        switch (type) {
+            case MOTORCYCLE -> {
+                return new Motorcycle(licensePlateGenerator(), type);
+            }
+            case CAR -> {
+                return new Car(licensePlateGenerator(), type);
+            }
+            case VAN -> {
+                return new Van(licensePlateGenerator(), type);
+            }
+            default -> throw new IllegalArgumentException("This vehicle type is currently not supported by our parking");
+        }
     }
 
     //This does not conform to factory best practices, but used this only during development
