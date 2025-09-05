@@ -6,7 +6,7 @@ public class StandardSpot extends ParkingSpot {
 
     @Override
     public SpotType getSpotType() {
-        return null;
+        return SpotType.STANDARD;
     }
 
     @Override

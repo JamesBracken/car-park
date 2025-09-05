@@ -6,7 +6,7 @@ public class LargeSpot extends ParkingSpot {
 
     @Override
     public SpotType getSpotType() {
-        return null;
+        return SpotType.LARGE;
     }
 
     @Override

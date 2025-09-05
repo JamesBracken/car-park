@@ -9,13 +9,13 @@ public class ParkingMain {
         ParkingLot myParkingLot = new ParkingLot(5, 10, 10);
 
         VehicleFactory myFactory = new VehicleFactory();
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < 5; i++) {
 //            myParkingLot.parkVehicle(myFactory.createRandomVehicle()); -- This can be used to randomise the vehicle, understandably not best practice for factory
             myParkingLot.parkVehicle(myFactory.createVehicle(Vehicle.vehicleType.VAN));
             myParkingLot.parkVehicle(myFactory.createVehicle(Vehicle.vehicleType.CAR));
             myParkingLot.parkVehicle(myFactory.createVehicle(Vehicle.vehicleType.MOTORCYCLE));
         }
-
+        // -------------LEAVING PRINT STATEMENTS TO DISPLAY APP FUNCTIONALITY-----------------------
         System.out.println("getLargeParking: " + myParkingLot.getLargeParking());
         System.out.println("getParkedVehicles: " + myParkingLot.getParkedVehicles());
 
