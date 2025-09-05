@@ -6,7 +6,7 @@ public class CompactSpot extends ParkingSpot {
 
     @Override
     public SpotType getSpotType() {
-        return null;
+        return SpotType.COMPACT;
     }
 
     @Override
