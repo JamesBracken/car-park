@@ -14,6 +14,14 @@ This application solves the needs of a real world parking application, with the 
 
 The application in its current form does not contain a fronted and is a backend only application. To stay within scope I created a mini checklist which can be found within the project folder. Using the checklist I was able to make the sure the project was created in an organised and efficient manner.
 
+**Future Improvements**
+
+- Change the application to be an API which can be connected to a frontend 
+
+- Create a frontend to visually track parking spaces including vehicle entries and exits
+
+- Add the tracking and displaying of parking data such as daily total clients and more
+
 ### Surface
 
 This project does not currently have a frontend, future iterations of the project may include this.
